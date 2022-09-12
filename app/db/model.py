@@ -19,6 +19,7 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"]=False
 db = SQLAlchemy(app)
 
 class User(db.Model):
+    __tablename__ = 'user'
     id = db.Column(db.Integer, primary_key = True)
     public_id = db.Column(db.String(50), unique = True)
     username = db.Column(db.String(100))
@@ -26,6 +27,7 @@ class User(db.Model):
     password = db.Column(db.String(150))
 
 class Movie(db.Model):
+    __tablename__ = 'movie'
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(50))
     rating = db.Column(db.Float)
