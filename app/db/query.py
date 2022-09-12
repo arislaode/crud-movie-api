@@ -13,7 +13,7 @@ def get_movie(title_ : str):
 def get_movie_by_id(id_ : int):
 
     check_movie_by_id = Movie.query\
-        .filter_by(id = id_)\
+        .filter_by(id=id_)\
         .first()
 
     return check_movie_by_id

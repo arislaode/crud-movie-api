@@ -12,9 +12,9 @@ def index():
 
     try:
         
-        return make_response( jsonify({"message" : 'success'}), 200)
+        return jsonify({"message" : 'success'}), 200
 
-    except BaseException as err:
+    except Exception as err:
         
         detail: str = err.args[0]
-        abort(make_response( jsonify({"message" : f'{detail}'}), 500))
+        return jsonify({"message" : f'{detail}'}), 500

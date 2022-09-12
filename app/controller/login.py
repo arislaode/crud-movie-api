@@ -33,12 +33,12 @@ def login():
             }, os.getenv("SECRET_KEY"))
             results = { 'message': 'success', 'username' : username_, 'token' : token.decode('UTF-8'), 'status': 200}
             
-            return make_response(jsonify(results))
+            return jsonify(results), 200
         else:
-            return make_response(jsonify({'message' : 'wrong password', 'status': 403}))
+            return jsonify({'message' : 'wrong password'}), 403
 
     except Exception as error_api:
 
         message: str = f"{error_api.args}"
 
-        abort(make_response(jsonify({"message" : f'{message}'}), 500))
+        return jsonify({"message" : f'{message}'}), 500

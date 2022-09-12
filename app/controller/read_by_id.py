@@ -26,10 +26,10 @@ def read_by_id():
             'owned' : results_movie.owned
         })
 
-        return make_response(jsonify({"message" : 'success', 'results': output, 'status': 200}))
+        return jsonify({"message" : 'success', 'results': output}), 200
 
     except BaseException as error_api:
         
         message: str = f"{error_api.args}"
 
-        abort(make_response(jsonify({"message" : f'{message}'}), 500))
+        return jsonify({"message" : f'{message}'}), 500

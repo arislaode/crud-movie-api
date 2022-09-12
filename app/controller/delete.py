@@ -24,14 +24,14 @@ def delete():
             delete_movie(id_)
             db.session.commit()
 
-            return make_response(jsonify({"message" : 'Delete movie success', 'status' : 200}))
+            return jsonify({"message" : 'Delete movie success'}), 200
 
         else:
 
-            return make_response(jsonify({"message" : 'Movie not exist', 'status' : 200}))
+            return jsonify({"message" : 'Movie not exist'}), 404
 
     except BaseException as error_api:
         
         message: str = f"{error_api.args}"
 
-        abort(make_response(jsonify({'message': f'{message}'}), 500))
+        return (jsonify({'message': f'{message}'})), 500

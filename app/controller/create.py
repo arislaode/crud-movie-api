@@ -30,13 +30,14 @@ def create():
             db.session.add(add_movie)
             db.session.commit()
 
-            return make_response(jsonify({'message' : 'Movie Created', 'status': 200}))
+            return jsonify({'message' : 'Movie Created'}), 201
             
         else:
 
-            return make_response(jsonify({'message' : 'Movie Already Exist', 'status': 201}))
+            return jsonify({'message' : 'Movie Already Exist'}), 409
+
     except Exception as error_api:
 
         message: str = f"{error_api.args}"
 
-        abort(make_response(jsonify({'message': f'{message}'}), 500))
+        return (jsonify({'message': f'{message}'})), 500

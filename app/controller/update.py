@@ -38,13 +38,13 @@ def update():
 
             else:
 
-                return make_response(jsonify({'message' : 'Movie already exists', 'status': 201}))
+                return jsonify({'message' : 'Movie already exists'}), 403
         else:
 
-            return make_response(jsonify({'message' : 'Movie not exists', 'status': 401}))
+            return jsonify({'message' : 'Movie not exists'}), 401
 
     except Exception as error_api:
 
         message: str = f"{error_api.args}"
 
-        abort(make_response(jsonify({"message" : f'{message}'}), 500))
+        return jsonify({"message" : f'{message}'}), 500

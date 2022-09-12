@@ -31,10 +31,10 @@ def signup():
 
         else:
 
-            return make_response(jsonify({'message': 'User already exists', 'status': 201}))
+            return jsonify({'message': 'User already exists'}), 403
 
     except Exception as error_api:
 
         message: str = f"{error_api.args}"
 
-        abort(make_response(jsonify({"message" : f'{message}', 'status': 500})))
+        return jsonify({"message" : f'{message}', 'status': 500}), 500
