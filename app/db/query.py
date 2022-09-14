@@ -1,4 +1,5 @@
 from app.db.model import User, Movie
+from app.schema.schema import user_schema, movie_schema
 from datetime import datetime
 
 
@@ -20,7 +21,8 @@ def get_movie_by_id(id_ : int):
 
 def get_movie_all():
 
-    result_movie = Movie.query.all()
+    movie_list = Movie.query.all()
+    result_movie = movie_schema.dump(movie_list)
 
     return result_movie
 
@@ -50,6 +52,12 @@ def create_movie(title_:str, rating_: int, image_ : str, owned_: str):
                     )
 
     return create_movie_
+
+def get_user_all():
+    user_list = User.query.all()
+    result_user = user_schema.dump(user_list)
+
+    return result_user
 
 def get_user(username_ : str):
 

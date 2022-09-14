@@ -40,4 +40,4 @@ def create():
 
         message: str = f"{error_api.args}"
 
-        return (jsonify({'message': f'{message}'})), 500
+        return jsonify({'message': f'{message}'}), 500

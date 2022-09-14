@@ -1,15 +1,11 @@
 import os, sys, inspect
+from flask import  jsonify, request
+from app.db.query import get_movie_by_id, get_movie_all
+
+
 currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 parentdir = os.path.dirname(currentdir)
 sys.path.insert(0,parentdir)
-from flask import (
-    make_response,
-    jsonify, 
-    abort,
-    request
-)
-from app.db.query import get_movie_by_id
-
 
 def read_by_id():
 
@@ -27,6 +23,20 @@ def read_by_id():
         })
 
         return jsonify({"message" : 'success', 'results': output}), 200
+
+    except BaseException as error_api:
+        
+        message: str = f"{error_api.args}"
+
+        return jsonify({"message" : f'{message}'}), 500
+
+def read_movie():
+
+    try:
+
+        results_movie = get_movie_all()
+
+        return jsonify({"message" : 'success', 'results_movie': results_movie}), 200
 
     except BaseException as error_api:
         
